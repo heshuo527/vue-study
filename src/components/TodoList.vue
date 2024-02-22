@@ -4,9 +4,16 @@
     <button @click="addTodo">添加</button>
     <!-- 遍历todos -->
     <ul>
-      <li v-for="{ id, name } in todos" :key="id">
-        <button @click="handleDelete(index)">删除</button>
-        <button @click="handleDelete(index)">完成</button>
+      <li
+        v-for="{ id, name, done } in todos"
+        :key="id"
+        :style="{
+          color: done ? 'red' : '',
+          textDecoration: done ? 'line-through' : '',
+        }"
+      >
+        <button @click="handleDelete(id)">删除</button>
+        <button @click="handleDone(id)">完成</button>
         {{ name }}
       </li>
     </ul>
@@ -15,6 +22,7 @@
 
 <script>
 export default {
+  // 全局数据
   data() {
     return {
       todos: [],
@@ -24,7 +32,7 @@ export default {
   methods: {
     /**
      * 添加一个todo
-     * @param {obj}
+     * @param {*} obj
      */
     addTodo() {
       this.todos.push({
@@ -32,7 +40,6 @@ export default {
         name: this.inputValue,
         done: false,
       });
-      console.log("11111", this.todos);
     },
     /**
      * 监听输入框的值
@@ -42,11 +49,26 @@ export default {
       const { value } = e.target;
       this.inputValue = value;
     },
-    handleDelete(v) {
-      console.log(v);
-      const { id: i } = v[0];
-      const copyTodos = this.todos.filter(({ id }) => id !== i);
+    /**
+     * 删除一个todo
+     * @param {*} id
+     */
+    handleDelete(id) {
+      const copyTodos = this.todos.filter((p) => p.id !== id);
       this.todos = copyTodos;
+    },
+    /**
+     * 完成一个todo
+     * @param {*} id
+     */
+    handleDone(id) {
+      const data = [...this.todos];
+      data.forEach((item) => {
+        if (item.id === id) {
+          item.done = !item.done;
+        }
+      });
+      this.todos = data;
     },
   },
 };
