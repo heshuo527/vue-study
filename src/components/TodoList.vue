@@ -33,7 +33,7 @@ export default {
   created() {
     const todos = localStorage.getItem('todos');
     this.todos = JSON.parse(todos) || [];
-x  },
+  },
   methods: {
     /**
      * 添加一个todo
