@@ -29,6 +29,11 @@ export default {
       inputValue: "",
     };
   },
+  // 初始化数据  从本地获取
+  created() {
+    const todos = localStorage.getItem('todos');
+    this.todos = JSON.parse(todos) || [];
+x  },
   methods: {
     /**
      * 添加一个todo
@@ -44,6 +49,7 @@ export default {
         done: false,
       });
       this.inputValue = "";
+      this.save(this.todos);
     },
     /**
      * 监听输入框的值
@@ -60,6 +66,7 @@ export default {
     handleDelete(id) {
       const copyTodos = this.todos.filter((p) => p.id !== id);
       this.todos = copyTodos;
+      this.save(this.todos);
     },
     /**
      * 完成一个todo
@@ -73,6 +80,16 @@ export default {
         }
       });
       this.todos = data;
+      this.save(this.todos);
+    },
+
+    /**
+     * 实现本地存储
+     * @param {*} todos 需要存储的数组
+     */
+    save(todos) {
+      const styData = JSON.stringify(todos);
+      localStorage.setItem("todos", styData);
     },
   },
 };
