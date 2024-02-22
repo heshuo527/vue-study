@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" @change="handleValue" />
+    <input type="text" @change="handleValue" :value="inputValue" />
     <button @click="addTodo">添加</button>
     <!-- 遍历todos -->
     <ul>
@@ -35,11 +35,15 @@ export default {
      * @param {*} obj
      */
     addTodo() {
+      if (this.inputValue === "") {
+        return alert("请输入内容!");
+      }
       this.todos.push({
         id: new Date().getTime(),
         name: this.inputValue,
         done: false,
       });
+      this.inputValue = "";
     },
     /**
      * 监听输入框的值
