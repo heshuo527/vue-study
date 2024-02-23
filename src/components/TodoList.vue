@@ -1,6 +1,11 @@
 <template>
   <div>
-    <input type="text" @change="handleValue" :value="inputValue" />
+    <input
+      type="text"
+      @change="handleValue"
+      :value="inputValue"
+      @keydown.enter="addTodo"
+    />
     <button @click="addTodo">添加</button>
     <!-- 遍历todos -->
     <ul>
@@ -13,7 +18,9 @@
         }"
       >
         <button @click="handleDelete(id)">删除</button>
-        <button @click="handleDone(id)">完成</button>
+        <button @click="handleDone(id)">
+          {{ done ? "已完成" : "未完成" }}
+        </button>
         {{ name }}
       </li>
     </ul>
@@ -31,7 +38,7 @@ export default {
   },
   // 初始化数据  从本地获取
   created() {
-    const todos = localStorage.getItem('todos');
+    const todos = localStorage.getItem("todos");
     this.todos = JSON.parse(todos) || [];
   },
   methods: {

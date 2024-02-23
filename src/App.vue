@@ -6,6 +6,7 @@
         :size="100"
       />
       <TodoList />
+      <TodoListTable />
     </div>
   </div>
 </template>
@@ -13,11 +14,13 @@
 <script>
 import HelloWorld from "./components/Avatar.vue";
 import TodoList from "./components/TodoList.vue";
+import TodoListTable from "./components/TodoListTable.vue";
 
 export default {
   components: {
     HelloWorld,
     TodoList,
+    TodoListTable,
   },
 };
 </script>
