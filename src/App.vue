@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="app">
-      <HelloWorld
+      <Avatar
         url="https://tse3-mm.cn.bing.net/th/id/OIP-C.DR0pzvBSWjhtHKlP7NmcEgHaE8?w=256&h=180&c=7&r=0&o=5&dpr=2&pid=1.7"
         :size="100"
       />
@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import HelloWorld from "./components/Avatar.vue";
+import Avatar from "./components/Avatar.vue";
 import TodoList from "./components/TodoList.vue";
 import TodoListTable from "./components/TodoListTable.vue";
 
 export default {
   components: {
-    HelloWorld,
+    Avatar,
     TodoList,
     TodoListTable,
   },
